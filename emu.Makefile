@@ -15,8 +15,8 @@
 #  this program. If not, see https://www.gnu.org/licenses/gpl-2.0.txt
 #
 # 
-# Author  : iocuser
-# email   : iocuser@esss.se
+# Author  : Joao Paulo Martins
+# email   : joaopaulo.martins@esss.se
 # Date    : 2019Mar05-1610-35CET
 # version : 0.0.0 
 #
@@ -35,24 +35,20 @@ include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
 # one should look at other modules makefile to add more
 # In most case, one should ignore the following lines:
 
-#ifneq ($(strip $(ASYN_DEP_VERSION)),)
-#asyn_VERSION=$(ASYN_DEP_VERSION)
-#endif
+ifneq ($(strip $(FASTACQUISITION_DEP_VERSION)),)
+fastacquisition_VERSION=$(FASTACQUISITION_DEP_VERSION)
+endif
 
-#ifneq ($(strip $(SEQUENCER_DEP_VERSION)),)
-#sequencer_VERSION=$(SEQUENCER_DEP_VERSION)
-#endif
-
-
+ifneq ($(strip $(SCANNING_DEP_VERSION)),)
+scanning_VERSION=$(SCANNING_DEP_VERSION)
+endif
 
 ## Exclude linux-ppc64e6500
 ##EXCLUDE_ARCHS = linux-ppc64e6500
 
-
 # APP:=calcApp
-# APPDB:=$(APP)/Db
-# APPSRC:=$(APP)/src
-
+APPDB:=db
+APPSRC:=src
 
 # USR_INCLUDES += -I$(where_am_I)$(APPSRC)
 
@@ -66,7 +62,7 @@ include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
 # TEMPLATES += $(wildcard $(APPDB)/*.db)
 # TEMPLATES += $(wildcard $(APPDB)/*.db)
 # TEMPLATES += $(wildcard $(APPDB)/*.proto)
-# TEMPLATES += $(wildcard $(APPDB)/*.template)
+TEMPLATES += $(wildcard $(APPDB)/*.template)
 
 
 # DBDINC_SRCS += $(APPSRC)/swaitRecord.c
@@ -85,8 +81,11 @@ include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
 # HEADERS += $(DBDINC_HDRS)
 
 
-# SOURCES += $(APPSRC)/sCalcPostfix.c
-# SOURCES += $(APPSRC)/sCalcPerform.c
+SOURCES += $(APPSRC)/EMU_CALCULS.c
+SOURCES += $(APPSRC)/EMU_REPORT_FILE.c
+SOURCES += $(APPSRC)/EMU_MTR-CHECKBRAKE.st
+SOURCES += $(APPSRC)/EMU_MTR-HOME_AUTO.st
+
 # SOURCES += $(APPSRC)/aCalcPostfix.c
 # SOURCES += $(APPSRC)/aCalcPerform.c
 
@@ -103,7 +102,7 @@ include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
 # # DBDINC_SRCS should be last of the series of SOURCES
 # SOURCES += $(DBDINC_SRCS)
 
-# DBDS += $(APPSRC)/calcSupport_LOCAL.dbd
+DBDS += $(APPSRC)/emu.dbd
 # DBDS += $(APPSRC)/calcSupport_withSNCSEQ.dbd
 # DBDS += $(APPSRC)/calcSupport_withSSCAN.dbd
 
@@ -182,34 +181,34 @@ SCRIPTS += $(wildcard ../iocsh/*.iocsh)
 ## db rule is the default in RULES_DB, so add the empty one
 ## Please look at e3-mrfioc2 for example.
 
-db: 
+# db: 
 
-.PHONY: db 
+# .PHONY: db 
 
-#
-# USR_DBFLAGS += -I . -I ..
-# USR_DBFLAGS += -I $(EPICS_BASE)/db
-# USR_DBFLAGS += -I $(APPDB)
-#
-# SUBS=$(wildcard $(APPDB)/*.substitutions)
-# TMPS=$(wildcard $(APPDB)/*.template)
-#
-# db: $(SUBS) $(TMPS)
 
-# $(SUBS):
-#	@printf "Inflating database ... %44s >>> %40s \n" "$@" "$(basename $(@)).db"
-#	@rm -f  $(basename $(@)).db.d  $(basename $(@)).db
-#	@$(MSI) -D $(USR_DBFLAGS) -o $(basename $(@)).db -S $@  > $(basename $(@)).db.d
-#	@$(MSI)    $(USR_DBFLAGS) -o $(basename $(@)).db -S $@
+USR_DBFLAGS += -I . -I ..
+USR_DBFLAGS += -I $(EPICS_BASE)/db
+USR_DBFLAGS += -I $(APPDB)
 
-# $(TMPS):
-#	@printf "Inflating database ... %44s >>> %40s \n" "$@" "$(basename $(@)).db"
-#	@rm -f  $(basename $(@)).db.d  $(basename $(@)).db
-#	@$(MSI) -D $(USR_DBFLAGS) -o $(basename $(@)).db $@  > $(basename $(@)).db.d
-#	@$(MSI)    $(USR_DBFLAGS) -o $(basename $(@)).db $@
+SUBS=$(wildcard $(APPDB)/*.substitutions)
+TMPS=$(wildcard $(APPDB)/*.template)
 
-#
-# .PHONY: db $(SUBS) $(TMPS)
+db: $(SUBS) $(TMPS)
+
+$(SUBS):
+	@printf "Inflating database ... %44s >>> %40s \n" "$@" "$(basename $(@)).db"
+	@rm -f  $(basename $(@)).db.d  $(basename $(@)).db
+	@$(MSI) -D $(USR_DBFLAGS) -o $(basename $(@)).db -S $@  > $(basename $(@)).db.d
+	@$(MSI)    $(USR_DBFLAGS) -o $(basename $(@)).db -S $@
+
+$(TMPS):
+	@printf "Inflating database ... %44s >>> %40s \n" "$@" "$(basename $(@)).db"
+	@rm -f  $(basename $(@)).db.d  $(basename $(@)).db
+	@$(MSI) -D $(USR_DBFLAGS) -o $(basename $(@)).db $@  > $(basename $(@)).db.d
+	@$(MSI)    $(USR_DBFLAGS) -o $(basename $(@)).db $@
+
+
+.PHONY: db $(SUBS) $(TMPS)
 
 vlibs:
 

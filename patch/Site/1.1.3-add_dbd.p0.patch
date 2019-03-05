@@ -1,0 +1,14 @@
+diff --git src/emu.dbd src/emu.dbd
+new file mode 100644
+index 0000000..7b63638
+--- /dev/null
++++ src/emu.dbd
+@@ -0,0 +1,8 @@
++function(FACTOR_CONVERSION)
++function(ANGLE_CALCUL)
++function(CREATE_TAB)
++function(INIT_TAB)
++function(CREATE_PROJXY)
++function(CREATE_REPORT)
++
++
