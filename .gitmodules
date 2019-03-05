@@ -1,0 +1,4 @@
+[submodule "m-epics-emu"]
+	path = m-epics-emu
+	url = https://bitbucket.org/europeanspallationsource/m-epics-emu
+	ignore = all
