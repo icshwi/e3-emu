@@ -43,6 +43,14 @@ ifneq ($(strip $(SCANNING_DEP_VERSION)),)
 scanning_VERSION=$(SCANNING_DEP_VERSION)
 endif
 
+ifneq ($(strip $(SEQUENCER_DEP_VERSION)),)
+sequencer_VERSION=$(SEQUENCER_DEP_VERSION)
+endif
+
+ifneq ($(strip $(SSCAN_DEP_VERSION)),)
+sscan_VERSION=$(SSCAN_DEP_VERSION)
+endif
+
 ## Exclude linux-ppc64e6500
 ##EXCLUDE_ARCHS = linux-ppc64e6500
 
@@ -83,8 +91,8 @@ TEMPLATES += $(wildcard $(APPDB)/*.template)
 
 SOURCES += $(APPSRC)/EMU_CALCULS.c
 SOURCES += $(APPSRC)/EMU_REPORT_FILE.c
-SOURCES += $(APPSRC)/EMU_MTR-CHECKBRAKE.st
-SOURCES += $(APPSRC)/EMU_MTR-HOME_AUTO.st
+#SOURCES += $(APPSRC)/EMU_MTR-CHECKBRAKE.st
+#SOURCES += $(APPSRC)/EMU_MTR-HOME_AUTO.st
 
 # SOURCES += $(APPSRC)/aCalcPostfix.c
 # SOURCES += $(APPSRC)/aCalcPerform.c
