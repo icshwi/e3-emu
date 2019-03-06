@@ -1,0 +1,60 @@
+diff --git db/EMU_VME_common.substitutions db/EMU_VME_common.substitutions
+index 7fa9d71..4d9b05d 100644
+--- db/EMU_VME_common.substitutions
++++ db/EMU_VME_common.substitutions
+@@ -41,30 +41,30 @@ file EMU_DACQ_SYNC.template
+ ##########################################################################
+ ################################ ETHERCAT ################################
+ ##########################################################################
+-file ecat2el41xx.template
+-{
+-	pattern {PREFIX,CH_ID, SLAVE_IDX,PDO_IDX, EOFF, ESLO, DRVL, DRVH, PREC,EGU}
+-		    {"$(DEVICE)","HVhor-SP",  3, 0, 0, 0.0003051850947599719, -10, 10,5,"kV"}
+-		    {"$(DEVICE)","HVver-SP",  3, 2, 0, 0.0003051850947599719, -10, 10,5,"kV"}
+-     		{"$(DEVICE)V","BPS-CurS", 2 ,0, 0,0.000244148, 0, 8,1,"mA"}
+-        	{"$(DEVICE)V","BPS-VolS", 2 ,1, 0 , 0.09155553, 0, 1500,1,"V"}
+-        	{"$(DEVICE)H","BPS-CurS", 2 ,2, 0, 0.000244148, 0, 8,1,"mA"}
+-        	{"$(DEVICE)H","BPS-VolS", 2 ,3, 0 , 0.09155553, 0, 1500,1,"V"}
+-}
++#file ecat2el41xx.template
++#{
++#	pattern {PREFIX,CH_ID, SLAVE_IDX,PDO_IDX, EOFF, ESLO, DRVL, DRVH, PREC,EGU}
++#		    {"$(DEVICE)","HVhor-SP",  3, 0, 0, 0.0003051850947599719, -10, 10,5,"kV"}
++#		    {"$(DEVICE)","HVver-SP",  3, 2, 0, 0.0003051850947599719, -10, 10,5,"kV"}
++#    		{"$(DEVICE)V","BPS-CurS", 2 ,0, 0,0.000244148, 0, 8,1,"mA"}
++#        	{"$(DEVICE)V","BPS-VolS", 2 ,1, 0 , 0.09155553, 0, 1500,1,"V"}
++#        	{"$(DEVICE)H","BPS-CurS", 2 ,2, 0, 0.000244148, 0, 8,1,"mA"}
++#        	{"$(DEVICE)H","BPS-VolS", 2 ,3, 0 , 0.09155553, 0, 1500,1,"V"}
++#}
+ 
+-file ecat2el316x.template
+-{
+-	pattern {PREFIX,CH_ID, SLAVE_IDX, PDO_IDX,EGU,ESLO,EOFF}
+-            {"$(DEVICE)V","BPS-CurR",1 ,0, "mA", 0.000244148,0}
+-            {"$(DEVICE)V","BPS-VolR",1 ,1, "V", 0.09155553,0}
+-            {"$(DEVICE)H","BPS-CurR",1 ,2, "mA", 0.000244148,0}
+-            {"$(DEVICE)H","BPS-VolR",1 ,3, "V", 0.09155553,0}
+-}
++#file ecat2el316x.template
++#{
++#	pattern {PREFIX,CH_ID, SLAVE_IDX, PDO_IDX,EGU,ESLO,EOFF}
++#            {"$(DEVICE)V","BPS-CurR",1 ,0, "mA", 0.000244148,0}
++#            {"$(DEVICE)V","BPS-VolR",1 ,1, "V", 0.09155553,0}
++#            {"$(DEVICE)H","BPS-CurR",1 ,2, "mA", 0.000244148,0}
++#            {"$(DEVICE)H","BPS-VolR",1 ,3, "V", 0.09155553,0}
++#}
+ 
+-file ecat2slave.template
+-{
+-	pattern {PREFIX,DTYP,MOD_ID,SLAVE_IDX,DEVICENAME}
+-		{"$(DEVICE)","ES4134","ES4134",3,""}
+-		{"$(DEVICE)","EL4104","EL4104",2,""}
+-		{"$(DEVICE)","ES3164","ES3164",1,""}
+-}
++#file ecat2slave.template
++#{
++#	pattern {PREFIX,DTYP,MOD_ID,SLAVE_IDX,DEVICENAME}
++#		{"$(DEVICE)","ES4134","ES4134",3,""}
++#		{"$(DEVICE)","EL4104","EL4104",2,""}
++#		{"$(DEVICE)","ES3164","ES3164",1,""}
++#}

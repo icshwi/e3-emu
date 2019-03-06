@@ -39,6 +39,10 @@ ifneq ($(strip $(FASTACQUISITION_DEP_VERSION)),)
 fastacquisition_VERSION=$(FASTACQUISITION_DEP_VERSION)
 endif
 
+ifneq ($(strip $(DATAACQUISITION_DEP_VERSION)),)
+dataacquisition_VERSION=$(DATAACQUISITION_DEP_VERSION)
+endif
+
 ifneq ($(strip $(SCANNING_DEP_VERSION)),)
 scanning_VERSION=$(SCANNING_DEP_VERSION)
 endif
@@ -197,6 +201,10 @@ SCRIPTS += $(wildcard ../iocsh/*.iocsh)
 USR_DBFLAGS += -I . -I ..
 USR_DBFLAGS += -I $(EPICS_BASE)/db
 USR_DBFLAGS += -I $(APPDB)
+
+USR_DBFLAGS += -I $(EPICS_BASE)/$(E3_REQUIRE_NAME)/$(E3_REQUIRE_VERSION)/siteMods/scanning/$(SCANNING_DEP_VERSION)/db
+USR_DBFLAGS += -I $(EPICS_BASE)/$(E3_REQUIRE_NAME)/$(E3_REQUIRE_VERSION)/siteMods/fastacquisition/$(FASTACQUISITION_DEP_VERSION)/db
+USR_DBFLAGS += -I $(EPICS_BASE)/$(E3_REQUIRE_NAME)/$(E3_REQUIRE_VERSION)/siteMods/dataacquisition/$(DATAACQUISITION_DEP_VERSION)/db
 
 SUBS=$(wildcard $(APPDB)/*.substitutions)
 TMPS=$(wildcard $(APPDB)/*.template)
