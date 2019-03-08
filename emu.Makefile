@@ -47,13 +47,13 @@ ifneq ($(strip $(SCANNING_DEP_VERSION)),)
 scanning_VERSION=$(SCANNING_DEP_VERSION)
 endif
 
-ifneq ($(strip $(SEQUENCER_DEP_VERSION)),)
-sequencer_VERSION=$(SEQUENCER_DEP_VERSION)
-endif
+# ifneq ($(strip $(SEQUENCER_DEP_VERSION)),)
+# sequencer_VERSION=$(SEQUENCER_DEP_VERSION)
+# endif
 
-ifneq ($(strip $(SSCAN_DEP_VERSION)),)
-sscan_VERSION=$(SSCAN_DEP_VERSION)
-endif
+# ifneq ($(strip $(SSCAN_DEP_VERSION)),)
+# sscan_VERSION=$(SSCAN_DEP_VERSION)
+# endif
 
 ## Exclude linux-ppc64e6500
 ##EXCLUDE_ARCHS = linux-ppc64e6500
@@ -72,10 +72,10 @@ APPSRC:=src
 # USR_CPPFLAGS += -Wno-unused-but-set-variable
 
 # TEMPLATES += $(wildcard $(APPDB)/*.db)
-# TEMPLATES += $(wildcard $(APPDB)/*.db)
 # TEMPLATES += $(wildcard $(APPDB)/*.proto)
 TEMPLATES += $(wildcard $(APPDB)/*.template)
-
+TEMPLATES += $(APPDB)/EMU_VME.db
+TEMPLATES += $(APPDB)/EMU_VME_common.db
 
 # DBDINC_SRCS += $(APPSRC)/swaitRecord.c
 # DBDINC_SRCS += $(APPSRC)/sseqRecord.c
@@ -205,6 +205,11 @@ USR_DBFLAGS += -I $(APPDB)
 USR_DBFLAGS += -I $(EPICS_BASE)/$(E3_REQUIRE_NAME)/$(E3_REQUIRE_VERSION)/siteMods/scanning/$(SCANNING_DEP_VERSION)/db
 USR_DBFLAGS += -I $(EPICS_BASE)/$(E3_REQUIRE_NAME)/$(E3_REQUIRE_VERSION)/siteMods/fastacquisition/$(FASTACQUISITION_DEP_VERSION)/db
 USR_DBFLAGS += -I $(EPICS_BASE)/$(E3_REQUIRE_NAME)/$(E3_REQUIRE_VERSION)/siteMods/dataacquisition/$(DATAACQUISITION_DEP_VERSION)/db
+
+# USR_DBFLAGS += -I $(E3_SITELIBS_PATH)/scanning_$(SCANNING_DEP_VERSION)_db
+# USR_DBFLAGS += -I $(E3_SITELIBS_PATH)/fastacquisition_$(FASTACQUISITION_DEP_VERSION)_db
+# USR_DBFLAGS += -I $(E3_SITELIBS_PATH)/dataacquisition_$(DATAACQUISITION_DEP_VERSION)_db
+
 
 SUBS=$(wildcard $(APPDB)/*.substitutions)
 TMPS=$(wildcard $(APPDB)/*.template)
